@@ -1,22 +1,28 @@
 import Image from "next/image";
-import image1 from '@/public/about-1.jpg'
-import image2 from '@/public/about-2.jpg'
+import image1 from '@/public/about-1.jpg';
 import { getCabins } from "../_lib/data-service";
-export const revalidate=86400;
+
+export const revalidate = 86400;
+
 export const metadata = {
-    title:' Iam About',
-    description: 'Luxurious cabin hotel, located in the heart of the Italian Dolomites, surrounded by beatiful mountains and dark forests',
-  }
-  export default async function Page() {
-    const numberOfCabins=await getCabins();
-    return (
-      <div className="grid grid-cols-5 gap-x-24 gap-y-32 text-lg items-center">
-        <div className="col-span-3">
-          <h1 className="text-4xl mb-10 text-accent-400 font-medium">
+  title: 'Iam About',
+  description: 'Luxurious cabin hotel, located in the heart of the Italian Dolomites, surrounded by beautiful mountains and dark forests',
+};
+
+export default async function Page() {
+  const numberOfCabins = await getCabins();
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      {/* القسم الأول: النص والصورة */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-16">
+
+        <div className="order-2 md:order-1">
+        <h1 className="text-2xl sm:text-4xl mb-6 text-accent-400 font-medium">
             Welcome to The Wild Oasis
           </h1>
-  
-          <div className="space-y-8">
+
+          <div className="space-y-6">
             <p>
               Where nature&apos;s beauty and comfortable living blend seamlessly.
               Hidden away in the heart of the Italian Dolomites, this is your
@@ -37,29 +43,35 @@ export const metadata = {
             </p>
           </div>
         </div>
-  
-        <div className="col-span-2">
+
+        <div className="order-1 md:order-2">
           <Image
             src={image1}
             placeholder="blur"
             quality={80}
             alt="Family sitting around a fire pit in front of cabin"
+            className="rounded-lg shadow-lg"
           />
         </div>
-  
-        <div className="aspect-square relative col-span-2">
-          <Image 
-          src="/about-2.jpg" // خليتها ك مسار لان مع الايام رح اجلب الصور من قاعدة البيانات لهيك رح جرب
-          fill className="object-cover"
-          alt="Family that manages The Wild Oasis" />
+      </div>
+
+      {/* القسم الثاني: الصورة والنص */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div className="aspect-square relative">
+          <Image
+            src="/about-2.jpg"
+            fill
+            className="object-cover rounded-lg shadow-lg"
+            alt="Family that manages The Wild Oasis"
+          />
         </div>
-  
-        <div className="col-span-3">
-          <h1 className="text-4xl mb-10 text-accent-400 font-medium">
+
+        <div>
+          <h1 className="text-2xl sm:text-4xl mb-6 text-accent-400 font-medium">
             Managed by our family since 1962
           </h1>
-  
-          <div className="space-y-8">
+
+          <div className="space-y-6">
             <p>
               Since 1962, The Wild Oasis has been a cherished family-run retreat.
               Started by our grandparents, this haven has been nurtured with love
@@ -74,11 +86,11 @@ export const metadata = {
               Oasis soon, where tradition meets tranquility, and every visit is
               like coming home.
             </p>
-  
+
             <div>
               <a
                 href="/cabins"
-                className="inline-block mt-4 bg-accent-500 px-8 py-5 text-primary-800 text-lg font-semibold hover:bg-accent-600 transition-all"
+                className="inline-block mt-4 bg-accent-500 px-4 py-2.5 sm:px-8 sm:py-5 text-primary-800 text-base sm:text-lg font-semibold hover:bg-accent-600 transition-all rounded-lg"
               >
                 Explore our luxury cabins
               </a>
@@ -86,6 +98,6 @@ export const metadata = {
           </div>
         </div>
       </div>
-    );
-  }
-  
+    </div>
+  );
+}
